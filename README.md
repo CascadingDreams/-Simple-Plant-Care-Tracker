@@ -37,16 +37,16 @@ pip install -r requirements.txt
 python run.py
 ```
 
-4. Open your browser to `http://localhost:5000`
+4. Open your browser to `http://localhost:5001`
 
 ### Troubleshooting
 
-**Port 5000 already in use?**
-If port 5000 is occupied, run on a different port:
+**Port 5001 already in use?**
+If port 5001 is occupied, run on a different port:
 ```bash
-APP_PORT=5001 python run.py
+APP_PORT=5002 python run.py
 ```
-Then visit `http://localhost:5001`
+Then visit `http://localhost:5002`
 
 **CSS not loading?**
 This should be automatically fixed. The app is configured to serve static files from the `/static` directory.

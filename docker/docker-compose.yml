@@ -7,7 +7,7 @@ services:
       context: ..
       dockerfile: docker/Dockerfile
     ports:
-      - "5000:5000"
+      - "5001:5001"
     volumes:
       # Mount source code for development
       - ..:/app
@@ -19,7 +19,7 @@ services:
       - DATABASE_URL=sqlite:///plants.db
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -40,7 +40,7 @@ services:
       - FLASK_SECRET_KEY=change-this-in-production
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
       interval: 30s
       timeout: 10s
       retries: 3
