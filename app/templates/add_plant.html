@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Add Plant - Plant Care Tracker{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-plus"></i> Add New Plant
+                </h3>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">
+                            <i class="fas fa-tag"></i> Plant Name *
+                        </label>
+                        <input type="text" class="form-control" id="name" name="name" 
+                               placeholder="e.g., My Fiddle Leaf Fig" required>
+                        <div class="form-text">Give your plant a friendly name</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="species" class="form-label">
+                            <i class="fas fa-leaf"></i> Species *
+                        </label>
+                        <input type="text" class="form-control" id="species" name="species" 
+                               placeholder="e.g., Ficus lyrata" required>
+                        <div class="form-text">What type of plant is this?</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="water_frequency" class="form-label">
+                            <i class="fas fa-calendar-alt"></i> Water Every (days) *
+                        </label>
+                        <select class="form-select" id="water_frequency" name="water_frequency" required>
+                            <option value="">Select watering frequency</option>
+                            <option value="1">Every day</option>
+                            <option value="2">Every 2 days</option>
+                            <option value="3">Every 3 days</option>
+                            <option value="7" selected>Once a week</option>
+                            <option value="10">Every 10 days</option>
+                            <option value="14">Every 2 weeks</option>
+                            <option value="21">Every 3 weeks</option>
+                            <option value="30">Once a month</option>
+                        </select>
+                        <div class="form-text">How often does this plant need water?</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="last_watered" class="form-label">
+                            <i class="fas fa-tint"></i> Last Watered *
+                        </label>
+                        <input type="date" class="form-control" id="last_watered" name="last_watered" required>
+                        <div class="form-text">When did you last water this plant?</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">
+                            <i class="fas fa-sticky-note"></i> Notes
+                        </label>
+                        <textarea class="form-control" id="notes" name="notes" rows="3" 
+                                  placeholder="Any special care instructions or observations..."></textarea>
+                        <div class="form-text">Optional care notes or reminders</div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('main.index') }}" class="btn btn-secondary me-md-2">
+                            <i class="fas fa-arrow-left"></i> Cancel
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-plus"></i> Add Plant
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Set today's date as default for last_watered
+document.getElementById('last_watered').valueAsDate = new Date();
+</script>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}My Plants - Plant Care Tracker{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1><i class="fas fa-seedling text-success"></i> My Plants</h1>
+            <a href="{{ url_for('main.add_plant') }}" class="btn btn-success">
+                <i class="fas fa-plus"></i> Add New Plant
+            </a>
+        </div>
+
+        {% if not plants %}
+            <div class="text-center py-5">
+                <i class="fas fa-seedling fa-3x text-muted mb-3"></i>
+                <h3 class="text-muted">No plants yet!</h3>
+                <p class="text-muted">Start by adding your first plant to track its care schedule.</p>
+                <a href="{{ url_for('main.add_plant') }}" class="btn btn-success btn-lg">
+                    <i class="fas fa-plus"></i> Add Your First Plant
+                </a>
+            </div>
+        {% else %}
+            <div class="row">
+                {% for plant in plants %}
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card h-100 {{ 'border-warning' if plant | needs_water else 'border-success' }}">
+                            <div class="card-header d-flex justify-content-between align-items-center 
+                                        {{ 'bg-warning text-dark' if plant | needs_water else 'bg-light' }}">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-leaf"></i> {{ plant.name }}
+                                </h5>
+                                {% if plant | needs_water %}
+                                    <span class="badge bg-danger">
+                                        <i class="fas fa-exclamation-triangle"></i> Needs Water
+                                    </span>
+                                {% endif %}
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <strong>Species:</strong> {{ plant.species }}<br>
+                                    <strong>Water every:</strong> {{ plant.water_frequency }} days<br>
+                                    <strong>Last watered:</strong> {{ plant.last_watered }} 
+                                    ({{ plant.last_watered | days_since }} days ago)
+                                </p>
+                                {% if plant.notes %}
+                                    <div class="alert alert-info">
+                                        <small><strong>Notes:</strong> {{ plant.notes }}</small>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="card-footer">
+                                <div class="btn-group w-100" role="group">
+                                    <a href="{{ url_for('main.water_plant', plant_id=plant.id) }}" 
+                                       class="btn btn-primary btn-sm">
+                                        <i class="fas fa-tint"></i> Water Now
+                                    </a>
+                                    <a href="{{ url_for('main.delete_plant', plant_id=plant.id) }}" 
+                                       class="btn btn-outline-danger btn-sm"
+                                       onclick="return confirm('Are you sure you want to delete this plant?')">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
