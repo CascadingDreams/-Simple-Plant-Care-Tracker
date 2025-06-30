@@ -83,6 +83,14 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# User uploaded images (optional - remove these lines if you want to commit your custom images)
+# static/images/*.png
+# static/images/*.jpg
+# static/images/*.jpeg
+# static/images/*.gif
+# static/images/*.svg
+# !static/images/README.md
+
 # Coverage reports
 htmlcov/
 .coverage

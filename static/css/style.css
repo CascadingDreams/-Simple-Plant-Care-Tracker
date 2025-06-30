@@ -1,39 +1,45 @@
-/* Plant Care Tracker - Autumn Spice Theme */
+/* Plant Care Tracker - Clean, Cute & Playful Theme */
 
 :root {
-    /* Autumn Color Palette */
-    --primary-color: #B8860B;       /* Dark goldenrod - warm and earthy */
-    --secondary-color: #CD853F;     /* Peru - rich autumn brown */
-    --accent-color: #DAA520;        /* Goldenrod - bright autumn accent */
-    --tertiary-color: #D2691E;      /* Chocolate - deeper autumn tone */
+    /* Clean, Cute & Playful Plant Theme */
+    --primary-color: #4CAF50;       /* Fresh green - main theme */
+    --secondary-color: #66BB6A;     /* Light green - secondary elements */
+    --accent-color: #81C784;        /* Soft green - highlights */
+    --tertiary-color: #A5D6A7;      /* Very light green - subtle accents */
+    
+    /* Playful colors */
+    --pink-accent: #F8BBD9;         /* Soft pink for fun elements */
+    --blue-accent: #B3E5FC;         /* Light blue for variety */
+    --yellow-accent: #FFF9C4;       /* Soft yellow for warmth */
     
     /* Background colors */
-    --bg-primary: #FEFCF9;          /* Very light cream background */
-    --bg-secondary: #FAF8F5;        /* Subtle warm white */
+    --bg-primary: #FAFAFA;          /* Clean white background */
+    --bg-secondary: #F1F8E9;        /* Very light green tint */
     --bg-card: #FFFFFF;             /* Pure white for cards */
     
     /* Text colors */
-    --text-primary: #5D4037;        /* Brown grey - main text */
-    --text-secondary: #8D6E63;      /* Light brown - secondary text */
-    --text-light: #A1887F;          /* Very light brown - muted text */
+    --text-primary: #2E7D32;        /* Deep green - main text */
+    --text-secondary: #388E3C;      /* Medium green - secondary text */
+    --text-light: #81C784;          /* Light green - muted text */
     
     /* Status colors */
-    --warning-color: #FF8F00;       /* Amber - needs water */
-    --danger-color: #D32F2F;        /* Red - danger/delete */
-    --success-color: #689F38;       /* Olive green - healthy plants */
+    --warning-color: #FF9800;       /* Orange - needs water */
+    --danger-color: #F44336;        /* Red - danger/delete */
+    --success-color: #4CAF50;       /* Green - healthy plants */
     
     /* Design system */
-    --border-radius: 8px;
-    --border-radius-lg: 12px;
-    --shadow-sm: 0 1px 4px rgba(139, 69, 19, 0.05);
-    --shadow-md: 0 2px 12px rgba(139, 69, 19, 0.08);
-    --shadow-lg: 0 4px 20px rgba(139, 69, 19, 0.12);
-    --shadow-hover: 0 6px 25px rgba(184, 134, 11, 0.15);
+    --border-radius: 12px;
+    --border-radius-lg: 16px;
+    --shadow-sm: 0 2px 8px rgba(76, 175, 80, 0.1);
+    --shadow-md: 0 4px 16px rgba(76, 175, 80, 0.15);
+    --shadow-lg: 0 8px 32px rgba(76, 175, 80, 0.2);
+    --shadow-hover: 0 12px 40px rgba(76, 175, 80, 0.25);
     
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     --gradient-accent: linear-gradient(135deg, var(--accent-color) 0%, var(--tertiary-color) 100%);
     --gradient-bg: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    --gradient-playful: linear-gradient(135deg, var(--pink-accent) 0%, var(--blue-accent) 100%);
 }
 
 /* Base styles */
@@ -58,10 +64,13 @@ h3 { font-size: 1.5rem; }
 
 /* Navigation */
 .navbar {
-    background: var(--primary-color) !important;
-    box-shadow: var(--shadow-sm);
-    padding: 1rem 0;
+    background: var(--gradient-primary) !important;
+    box-shadow: var(--shadow-md);
+    padding: 1.2rem 0;
+    position: relative;
+    overflow: hidden;
 }
+
 
 .navbar-brand {
     font-size: 1.5rem;
@@ -78,6 +87,28 @@ h3 { font-size: 1.5rem; }
     margin-right: 12px;
     font-size: 1.8rem;
     color: rgba(255, 255, 255, 0.9);
+}
+
+/* Logo styling */
+.navbar-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(1.1);
+    max-width: 120px;
+}
+
+/* Fallback if logo doesn't load */
+.navbar-brand img:not([src]), 
+.navbar-brand img[src=""] {
+    display: none;
+}
+
+.navbar-brand img:not([src]) + .navbar-brand::before,
+.navbar-brand img[src=""] + .navbar-brand::before {
+    content: "🌱";
+    margin-right: 8px;
+    font-size: 1.5rem;
 }
 
 .nav-link {
@@ -103,29 +134,38 @@ h3 { font-size: 1.5rem; }
 .card {
     transition: all 0.2s ease;
     border-radius: var(--border-radius-lg);
-    border: 1px solid rgba(184, 134, 11, 0.08);
+    border: 2px solid var(--tertiary-color);
     box-shadow: var(--shadow-sm);
     background: var(--bg-card);
     position: relative;
 }
 
 .card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-    border-color: rgba(184, 134, 11, 0.15);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--accent-color);
 }
 
 /* Plant status cards */
 .card.border-warning {
-    border: 1px solid var(--warning-color) !important;
-    background: var(--bg-card);
-    border-left: 4px solid var(--warning-color);
+    border: 2px solid var(--warning-color) !important;
+    background: linear-gradient(135deg, #FFF3E0 0%, var(--bg-card) 100%);
+    box-shadow: 0 4px 20px rgba(255, 152, 0, 0.2);
+}
+
+.card.border-warning::before {
+    background: var(--warning-color);
+    opacity: 1;
 }
 
 .card.border-success {
-    border: 1px solid var(--success-color) !important;
-    background: var(--bg-card);
-    border-left: 4px solid var(--success-color);
+    border: 2px solid var(--success-color) !important;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+    box-shadow: 0 4px 20px rgba(76, 175, 80, 0.2);
+}
+
+.card.border-success::before {
+    background: var(--gradient-accent);
+    opacity: 1;
 }
 
 .card-header {
@@ -136,9 +176,10 @@ h3 { font-size: 1.5rem; }
 }
 
 .card-header.bg-warning {
-    background: var(--warning-color) !important;
+    background: linear-gradient(135deg, var(--warning-color) 0%, #FFB74D 100%) !important;
     color: white !important;
     border-bottom: none;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
 .card-title {
@@ -151,6 +192,7 @@ h3 { font-size: 1.5rem; }
     color: var(--primary-color);
     margin-right: 8px;
     font-size: 1.1em;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .card-body {
@@ -168,14 +210,46 @@ h3 { font-size: 1.5rem; }
 }
 
 .card-footer {
-    background: rgba(184, 134, 11, 0.03);
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(255, 255, 255, 0.5) 100%);
+    border-top: 1px solid rgba(76, 175, 80, 0.1);
     padding: 1rem 1.5rem;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+/* Plant image styling */
+.plant-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: var(--gradient-accent);
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+}
+
+.plant-image-placeholder {
+    width: 100%;
+    height: 200px;
+    background: var(--gradient-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    font-size: 3rem;
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+    position: relative;
+}
+
+.plant-image-placeholder::after {
+    content: '🌱';
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    opacity: 0.6;
 }
 
 /* Buttons */
 .btn {
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius-lg);
     font-weight: 600;
     padding: 12px 24px;
     transition: all 0.2s ease;
@@ -185,35 +259,35 @@ h3 { font-size: 1.5rem; }
 }
 
 .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
 }
 
 .btn:active {
-    transform: translateY(0);
-    transition: transform 0.1s ease;
+    opacity: 0.9;
 }
 
 .btn-success {
-    background: var(--primary-color);
+    background: var(--gradient-primary);
     color: white;
-    box-shadow: 0 2px 8px rgba(184, 134, 11, 0.2);
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
 }
 
 .btn-success:hover {
-    background: var(--secondary-color);
+    background: var(--gradient-accent);
     color: white;
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
 }
 
 .btn-primary {
-    background: var(--accent-color);
+    background: var(--gradient-accent);
     color: white;
-    box-shadow: 0 2px 8px rgba(218, 165, 32, 0.2);
+    box-shadow: 0 4px 15px rgba(129, 199, 132, 0.3);
 }
 
 .btn-primary:hover {
-    background: var(--primary-color);
+    background: var(--gradient-primary);
     color: white;
+    box-shadow: 0 8px 25px rgba(129, 199, 132, 0.4);
 }
 
 .btn-outline-danger {
@@ -333,9 +407,10 @@ h3 { font-size: 1.5rem; }
     letter-spacing: 0.5px;
 }
 
+
 .bg-danger {
-    background: linear-gradient(135deg, var(--danger-red) 0%, #c0392b 100%) !important;
-    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+    background: linear-gradient(135deg, var(--danger-color) 0%, #D32F2F 100%) !important;
+    box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
 }
 
 /* Empty state */
@@ -344,6 +419,23 @@ h3 { font-size: 1.5rem; }
     opacity: 0.3;
     color: var(--primary-color);
     margin-bottom: 2rem;
+}
+
+.empty-state-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.empty-state-img {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    opacity: 0.8;
+    border-radius: 50%;
+    background: var(--gradient-playful);
+    padding: 25px;
+    box-shadow: 0 8px 32px rgba(76, 175, 80, 0.2);
 }
 
 /* Simple header styling */

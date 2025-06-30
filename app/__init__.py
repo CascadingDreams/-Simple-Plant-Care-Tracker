@@ -15,7 +15,7 @@ def create_app():
     
     # Configuration
     app.config['SECRET_KEY'] = os.getenv('FLASK_SECRET_KEY', 'dev-secret-key')
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///data/plants.db')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///instance/plants.db')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
     # Initialize extensions with app
